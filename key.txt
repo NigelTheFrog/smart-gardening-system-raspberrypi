@@ -1,0 +1,7 @@
+HostName=greenhouse-ubaya.azure-devices.net;DeviceId=smart-gardening-sensor;SharedAccessKey=t25ek8UiJJBPE2N8SenkEQkSsi7IMPgaPWU94JynF6c=
+
+set IOTHUB_DEVICE_CONNECTION_STRING=HostName=greenhouse-ubaya.azure-devices.net;DeviceId=smart-gardening-sensor;SharedAccessKey=t25ek8UiJJBPE2N8SenkEQkSsi7IMPgaPWU94JynF6c=
+
+func init --worker-runtime python app-trigger
+
+az iot hub connection-string show --default-eventhub --output table --hub-name greenhouse-ubaya
