@@ -124,10 +124,10 @@ packages:
     dependency: transitive
     description:
       name: intl
-      sha256: a3715e3bc90294e971cb7dc063fbf3cd9ee0ebf8604ffeafabd9e6f16abbdbe6
+      sha256: "4691515bb3f68ebbc4776bc97a84d429bb8e8c141a77b5ab988a4b02adb1747a"
       url: "https://pub.dev"
     source: hosted
-    version: "0.18.0"
+    version: "0.16.1"
   js:
     dependency: transitive
     description:
@@ -256,6 +256,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.0"
+  platform_detect:
+    dependency: transitive
+    description:
+      name: platform_detect
+      sha256: aab1dd0e19af823c0bbfc2d0f364e33abc52bd13be27711fea98bade0fe35213
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.4.0"
   plugin_platform_interface:
     dependency: transitive
     description:
@@ -272,6 +280,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.2.4"
+  pub_semver:
+    dependency: transitive
+    description:
+      name: pub_semver
+      sha256: "3c51ec0aaeccb85cacfe824816c60e1e3c53da586c64e1166422a906a4f7251c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.4.4"
   shared_preferences:
     dependency: "direct dev"
     description:
@@ -377,18 +393,18 @@ packages:
     dependency: "direct dev"
     description:
       name: syncfusion_flutter_charts
-      sha256: "0222ac9d8cb6c671f014effe9bd5c0aef35eadb16471355345ba87cc0ac007b3"
+      sha256: c437d17ebc6241752c0fc6b23840715e6e0c9c10a6fb6ee9c5d1579daabc4937
       url: "https://pub.dev"
     source: hosted
-    version: "20.4.54"
+    version: "17.4.51"
   syncfusion_flutter_core:
     dependency: transitive
     description:
       name: syncfusion_flutter_core
-      sha256: "3979f0b1c5a97422cadae52d476c21fa3e0fb671ef51de6cae1d646d8b99fe1f"
+      sha256: bc32f6fc5028e79e58fd25276ee2ce8adae357e6d427ce5667169959ba00a41d
       url: "https://pub.dev"
     source: hosted
-    version: "20.4.54"
+    version: "17.4.51"
   term_glyph:
     dependency: transitive
     description:
@@ -413,6 +429,46 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.1"
+  url_launcher:
+    dependency: transitive
+    description:
+      name: url_launcher
+      sha256: "0a1f90f605bbfa9832b3514cea3a74693c6e569b8a1999fabeba12d8216a85c9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.4.0"
+  url_launcher_macos:
+    dependency: transitive
+    description:
+      name: url_launcher_macos
+      sha256: be04eac5076414469027ce068c360478c3e56e43205bb7efaaa61cbdd3ba890d
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.1+9"
+  url_launcher_platform_interface:
+    dependency: transitive
+    description:
+      name: url_launcher_platform_interface
+      sha256: "9b5396f49780ac4f3e6563ab0936d8218182b0f1498318b5a7d1528e0293704f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
+  url_launcher_web:
+    dependency: transitive
+    description:
+      name: url_launcher_web
+      sha256: b7478fa6476d0971fd41508bea0b4a25c59ccd263daea09f22f8ca4114559043
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.3"
+  utf:
+    dependency: transitive
+    description:
+      name: utf
+      sha256: fcf596423864d67b6b4199f77d4bfd83e159eb62228ac0ec0781d8613fcd6a5c
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.9.0+5"
   vector_math:
     dependency: transitive
     description:

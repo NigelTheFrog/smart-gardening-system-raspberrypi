@@ -44,7 +44,7 @@ dev_dependencies:
   numberpicker: ^2.1.1
 
   path_provider: ^2.0.11
-  syncfusion_flutter_charts: ^20.4.44
+  syncfusion_flutter_charts: ^17.3.14
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -67,7 +67,10 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
   - assets/images/160419017_m.jpg
+  - assets/images/raspberry-pi-3.jpg
   - assets/images/raspberry-pi-3b.jpg
+  - assets/images/raspberry-pi-3b+.jpg
+  - assets/images/raspberry-pi-4.jpg
   - assets/images/dht-11.jpg
   - assets/images/light-sensor.jpg
   - assets/images/soil-moisture-sensor.jpg

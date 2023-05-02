@@ -38,15 +38,26 @@ def insert_error_log(id, error_code):
     response = requests.post(api_url, todo)
     response.json()
 
+
 def handle_method_request(request):
     global wait_time    
+    global servo_degree
     for i in data: 
         if request.name == i['id']+"_method_on": 
             if i['nama_sensor'] == 'Sensor Cahaya':
                 print("sensor id: " + i['id'] + ", sensor name: " + i['nama_sensor'] + "\nPort aktuator: " + i['port_aktuator'][1:] + ", value: " + str(request.payload)) 
                 servo = GroveServo(int(i['port_aktuator'][1:]))
-                servo.setAngle(180)
-                time.sleep(0.2)
+                for d in servo_degree:
+                    if d[0] == i['id']:   
+                        if d[1] == 0: 
+                            print("Servo berputar menuju 180")                                                
+                            for s in range(0, 180, +1):
+                                servo.setAngle(s)
+                                time.sleep(0.003)
+                            d[1] = 1  
+                        else:
+                            servo.setAngle(180)
+                            print("Servo stay di 180")              
                 insert_log(i['id'],str(request.payload), "Papan terbuka")  
             elif i['nama_sensor'] == 'Sensor Suhu':
                 GroveRelay(int(i['port_aktuator'][1:])).on()
@@ -65,8 +76,17 @@ def handle_method_request(request):
             if i['nama_sensor'] == 'Sensor Cahaya':
                 print("sensor id: " + i['id'] + ", sensor name: " + i['nama_sensor'] + "\nPort aktuator: " + i['port_aktuator'][1:] + ", value: " + str(request.payload)) 
                 servo = GroveServo(int(i['port_aktuator'][1:]))
-                servo.setAngle(0)
-                time.sleep(0.2)
+                for d in servo_degree:
+                    if d[0] == i['id']:
+                        if d[1] == 1:  
+                            print("Servo berputar menuju 0")                               
+                            for s in range(180, 0, -1):
+                                servo.setAngle(s)
+                                time.sleep(0.003)
+                            d[1] = 0
+                        else:
+                            servo.setAngle(0)
+                            print("Servo stay di 0")
                 insert_log(i['id'],str(request.payload), "Papan tertutup")  
             elif i['nama_sensor'] == 'Sensor Suhu':
                 GroveRelay(int(i['port_aktuator'][1:])).off()
@@ -93,19 +113,28 @@ while True:
     todo = {"raspberry_id": raspberrypi_id}
     response = requests.post(api_url, todo) 
     data = response.json()['data']  
-    todo = []  
-
+    
     for i in data:
         wait_time = [ele for ele in wait_time if ele != []]      
         wait = 0
+        servo_degree = [ele for ele in servo_degree if ele != []]   
         if i['nama_sensor'] == 'Sensor Kelembaban Tanah':
             value = ADC().read(int(i['port_sensor'][1:]))
+            
         elif i['nama_sensor'] == 'water-sensor':
             value = ADC().read(int(i['port_sensor'][1:]))
             if value < 100:
                 insert_error_log(i['id'], "S1")
         elif i['nama_sensor'] == 'Sensor Cahaya':
-            value = GroveLightSensor(int(i['port_sensor'][1:])).light
+            value = GroveLightSensor(int(i['port_sensor'][1:])).light  
+            if servo_degree == []:
+                y = [i['id'], 0]
+                servo_degree.append(y)
+            else :
+                for d in servo_degree:
+                    if d[0] != i['id'] :   
+                        y = [i['id'], 0]
+                        servo_degree.append(y) 
         elif i['nama_sensor'] == 'Sensor Suhu':
             _,value = DHT("11", int(i['port_sensor'][1:])).read()
         for w in wait_time:
@@ -116,6 +145,7 @@ while True:
                 else:
                     del w[0:]
                     wait = 0 
+        
         send_message(i['id'], i['nama_sensor'], value, wait)
         # except:
         #     print("error")
