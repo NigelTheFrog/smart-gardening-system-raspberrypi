@@ -13,16 +13,35 @@ def main(event: func.EventHubEvent):
     
     logging.info(f'Received message: {body} from {device_id}')
     
-    if body['sensor_name'] == 'soil-moisture-sensor':
-        if body['value'] < 450:
-            direct_method = CloudToDeviceMethod(method_name=body['sensor_id']+'_relay_on', payload=body["value"])   
+    if body['sensor_name'] == 'Sensor Kelembaban Tanah':
+        if body['wait_time'] > 0:
+            direct_method = CloudToDeviceMethod(method_name=body['sensor_id']+'_waiting', payload=body["value"])   
         else:
-            direct_method = CloudToDeviceMethod(method_name=body['sensor_id']+'_relay_off', payload=body["value"]) 
-    elif body['sensor_name'] == 'light-sensor':
+            if body['value'] < 450:            
+                direct_method = CloudToDeviceMethod(method_name=body['sensor_id']+'_method_on', payload=body["value"])   
+            else:
+                direct_method = CloudToDeviceMethod(method_name=body['sensor_id']+'_method_off', payload=body["value"]) 
+                
+    elif body['sensor_name'] == 'Sensor Ph':
+        if body['wait_time'] > 0:
+            direct_method = CloudToDeviceMethod(method_name=body['sensor_id']+'_waiting', payload=body["value"])   
+        else:
+            if body['value'] < 5.5:            
+                direct_method = CloudToDeviceMethod(method_name=body['sensor_id']+'_method_on', payload=body["value"])   
+            else:
+                direct_method = CloudToDeviceMethod(method_name=body['sensor_id']+'_method_off', payload=body["value"]) 
+                
+    elif body['sensor_name'] == 'Sensor Cahaya':
         if body['value'] < 200:
-            direct_method = CloudToDeviceMethod(method_name=body['sensor_id']+'_relay_on', payload=body["value"])   
+            direct_method = CloudToDeviceMethod(method_name=body['sensor_id']+'_method_on', payload=body["value"])   
         else:
-            direct_method = CloudToDeviceMethod(method_name=body['sensor_id']+'_relay_off', payload=body["value"])   
+            direct_method = CloudToDeviceMethod(method_name=body['sensor_id']+'_method_off', payload=body["value"])  
+            
+    elif body['sensor_name'] == 'Sensor Suhu':
+        if body['value'] >= 30:
+            direct_method = CloudToDeviceMethod(method_name=body['sensor_id']+'_method_on', payload=body["value"])   
+        else:
+            direct_method = CloudToDeviceMethod(method_name=body['sensor_id']+'_method_off', payload=body["value"])   
 
     logging.info(f'Sending direct method request for {direct_method.method_name} for device {device_id}')
 
